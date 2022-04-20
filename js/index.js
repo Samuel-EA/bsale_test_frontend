@@ -22,7 +22,7 @@ $(document).ready(function () {
     }
 
     $.ajax({
-        url: "http://localhost/api/product/paginate.php",
+        url: "http://localhost/bsale_test_api/product/paginate.php",
         data: JSON.stringify({ "records": 12, "page": page }),
         type: "POST",
         contentType: "text/plain",
@@ -38,7 +38,15 @@ $(document).ready(function () {
             var products = response.data;
             results.text(response.total + " resultados");
             var chileanPesoLocale = Intl.NumberFormat('es-CL');
-            products.forEach(product => productList.append("<div class='card p-3'><img src='"+product.url_image+"' class='card-img-top' alt='"+product.name+"'><div class='card-body'><h5 class='card-title'>"+product.name+"</h5></div><div class='card-footer'><div class='row'><div class='col col-md-9'><small class='text-muted'> $"+chileanPesoLocale.format(product.price)+"</small></div><div class='col col-md-2'><a class='btn btn-primary m-2'><i class='fa-solid fa-cart-plus'></i></a></div></div></div></div>"));
+            products.forEach(product => {
+                var image;
+                if(product.url_image == "" || product.url_image == undefined) {
+                    image = "img/no_image_available.jpg";
+                }else{
+                    image = product.url_image;
+                }
+                productList.append("<div class='card p-3'><img src='"+ image +"' class='card-img-top' alt='"+product.name+"'><div class='card-body'><h5 class='card-title'>"+product.name+"</h5></div><div class='card-footer'><div class='row'><div class='col col-md-9'><small class='text-muted'> $"+chileanPesoLocale.format(product.price)+"</small></div><div class='col col-md-2'><a class='btn btn-primary m-2'><i class='fa-solid fa-cart-plus'></i></a></div></div></div></div>")
+            });
             
             if(page == response.first){
                 previousContainer.addClass("disabled");
@@ -69,9 +77,9 @@ $(document).ready(function () {
     //#END REGION PRODUCT_LIST AJAX
 
     //#REGION CATEGORY FETCH
-    var categories = $("#categories");
+    var categoriesContainer = $("#categories");
     $.ajax({
-        url: "http://localhost/api/category/getCategories.php",
+        url: "http://localhost/bsale_test_api/category/getCategories.php",
         type: "GET",
         contentType: "text/plain",
         crossDomain: true,
@@ -82,7 +90,8 @@ $(document).ready(function () {
         },
         success: function (response) {
             console.log(response);
-            //response.forEach(category => categories.append("<li><a class='dropdown-item' href='category.html?id="+category.id+"'>"+category.name.toUpperCase()+"</a></li>"));
+            var categories = response.data;
+            categories.forEach(category => categoriesContainer.append("<li><a class='dropdown-item' href='category.html?id="+category.id+"'>"+category.name.toUpperCase()+"</a></li>"));
             loader.fadeToggle("fast");
             
         }
