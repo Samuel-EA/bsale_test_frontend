@@ -39,7 +39,7 @@ $(document).ready(function () {
     }
 
     $.ajax({
-        url: "http://localhost/bsale_test_api/product/getAllProducts.php",
+        url: "http://bsaletestapisamuelea-env.eba-bm2h4qb2.us-east-2.elasticbeanstalk.com/product/getAllProducts.php",
         data: JSON.stringify({ "records": 12, "page": page }),
         type: "POST",
         contentType: "text/plain",
@@ -97,7 +97,7 @@ $(document).ready(function () {
     //#REGION CATEGORY FETCH
     var categoriesContainer = $("#categories");
     $.ajax({
-        url: "http://localhost/bsale_test_api/category/getCategories.php",
+        url: "http://bsaletestapisamuelea-env.eba-bm2h4qb2.us-east-2.elasticbeanstalk.com/category/getCategories.php",
         type: "GET",
         contentType: "text/plain",
         crossDomain: true,
