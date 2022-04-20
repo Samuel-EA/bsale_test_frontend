@@ -26,7 +26,7 @@ $(document).ready(function () {
 
      //#REGION PRODUCT_LIST AJAX
     var productList = $("#product-list");
-    var results = $("#results");
+    var title = $("#title");
     var pagination = $("#pagination");
     var previousContainer = $("#previous-container");
     var previous = $("#previous");
@@ -39,13 +39,14 @@ $(document).ready(function () {
     }
 
     $.ajax({
-        url: "http://localhost/bsale_test_api/product/getProductsById.php",
+        url: "http://bsaletestapisamuelea-env.eba-bm2h4qb2.us-east-2.elasticbeanstalk.com//product/getProductsByCategory.php",
         data: JSON.stringify({ "records": 12, "page": page, "category" : category }),
         type: "POST",
         contentType: "text/plain",
         crossDomain: true,
         dataType: 'json',
         processData: false,
+        headers: {"Auth-Key":"bd1cf60a-d96e-417e-8a66-ceade5d684b9"},
         beforeSend: function () {
             loader.fadeToggle("fast");
         },
@@ -53,7 +54,7 @@ $(document).ready(function () {
             response = JSON.parse(response);
             console.log(response);
             var products = response.data;
-            results.text(response.total + " resultados");
+            title.text(response.total + " RESULTADOS PARA ESTA CATEGORÍA");
             var chileanPesoLocale = Intl.NumberFormat('es-CL');
             products.forEach(product => {
                 var image;
@@ -96,12 +97,13 @@ $(document).ready(function () {
     //#REGION CATEGORY FETCH
     var categoriesContainer = $("#categories");
     $.ajax({
-        url: "http://localhost/bsale_test_api/category/getCategories.php",
+        url: "http://bsaletestapisamuelea-env.eba-bm2h4qb2.us-east-2.elasticbeanstalk.com/category/getCategories.php",
         type: "GET",
         contentType: "text/plain",
         crossDomain: true,
         dataType: 'json',
         processData: false,
+        headers: {"Auth-Key":"bd1cf60a-d96e-417e-8a66-ceade5d684b9"},
         beforeSend: function () {
             loader.fadeToggle("fast");
         },

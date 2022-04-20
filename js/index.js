@@ -46,6 +46,7 @@ $(document).ready(function () {
         crossDomain: true,
         dataType: 'json',
         processData: false,
+        headers: {"Auth-Key":"bd1cf60a-d96e-417e-8a66-ceade5d684b9"},
         beforeSend: function () {
             loader.fadeToggle("fast");
         },
@@ -102,6 +103,7 @@ $(document).ready(function () {
         crossDomain: true,
         dataType: 'json',
         processData: false,
+        headers: {"Auth-Key":"bd1cf60a-d96e-417e-8a66-ceade5d684b9"},
         beforeSend: function () {
             loader.fadeToggle("fast");
         },

@@ -26,7 +26,7 @@ $(document).ready(function () {
 
      //#REGION PRODUCT_LIST AJAX
     var productList = $("#product-list");
-    var results = $("#results");
+    var title = $("#title");
     var pagination = $("#pagination");
     var previousContainer = $("#previous-container");
     var previous = $("#previous");
@@ -46,6 +46,7 @@ $(document).ready(function () {
         crossDomain: true,
         dataType: 'json',
         processData: false,
+        headers: {"Auth-Key":"bd1cf60a-d96e-417e-8a66-ceade5d684b9"},
         beforeSend: function () {
             loader.fadeToggle("fast");
         },
@@ -53,7 +54,7 @@ $(document).ready(function () {
             response = JSON.parse(response);
             console.log(response);
             var products = response.data;
-            results.text(response.total + " resultados");
+            title.text(response.total + " RESULTADOS PARA " + search.toUpperCase());
             var chileanPesoLocale = Intl.NumberFormat('es-CL');
             products.forEach(product => {
                 var image;
@@ -102,6 +103,7 @@ $(document).ready(function () {
         crossDomain: true,
         dataType: 'json',
         processData: false,
+        headers: {"Auth-Key":"bd1cf60a-d96e-417e-8a66-ceade5d684b9"},
         beforeSend: function () {
             loader.fadeToggle("fast");
         },
