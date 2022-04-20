@@ -22,7 +22,6 @@ $(document).ready(function () {
       });
 
 
-
     var loader = $("#loader");
 
      //#REGION PRODUCT_LIST AJAX
@@ -34,13 +33,14 @@ $(document).ready(function () {
     var nextContainer = $("#next-container");
     var next = $("#next");
     var page = $_GET.page;
+    var category = $_GET.category;
     if(page == null || page == "" || page == undefined) {
         page = 1;
     }
 
     $.ajax({
-        url: "http://localhost/bsale_test_api/product/getAllProducts.php",
-        data: JSON.stringify({ "records": 12, "page": page }),
+        url: "http://localhost/bsale_test_api/product/getProductsById.php",
+        data: JSON.stringify({ "records": 12, "page": page, "category" : category }),
         type: "POST",
         contentType: "text/plain",
         crossDomain: true,
@@ -65,24 +65,24 @@ $(document).ready(function () {
                 productList.append("<div class='card p-3'><img src='"+ image +"' class='card-img-top' alt='"+product.name+"'><div class='card-body'><h5 class='card-title'>"+product.name+"</h5></div><div class='card-footer'><div class='row'><div class='col col-md-9'><small class='text-muted'> $"+chileanPesoLocale.format(product.price)+"</small></div><div class='col col-md-2'><a class='btn btn-primary m-2'><i class='fa-solid fa-cart-plus'></i></a></div></div></div></div>")
             });
             
-            if(page == response.first){
+            if(page == response.first || response.total == 0){
                 previousContainer.addClass("disabled");
             } else {
-                previous.attr("href", "index.html?page="+response.previous);
+                previous.attr("href", "category.html?page="+response.previous+"&category="+category);
             }
 
-            if(page == response.last){
+            if(page == response.last || response.total == 0){
                 nextContainer.addClass("disabled");
             } else {
-                next.attr("href", "index.html?page="+response.next);
+                next.attr("href", "category.html?page="+response.next+"&category="+category);
             }
             
             
             for(var i = 1; i <= response.pages; i++){
                 if(i == page){
-                    pagination.append("<li class='page-item active'><a class='page-link' href='index.html?page="+i+"'>"+i+"</a></li>");
+                    pagination.append("<li class='page-item active'><a class='page-link' href='category.html?page="+i+"&category="+category+"'>"+i+"</a></li>");
                 }else{
-                    pagination.append("<li class='page-item'><a class='page-link' href='index.html?page="+i+"'>"+i+"</a></li>");
+                    pagination.append("<li class='page-item'><a class='page-link' href='category.html?page="+i+"&category="+category+"'>"+i+"</a></li>");
                 }
             
             }
