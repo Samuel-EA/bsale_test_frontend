@@ -63,7 +63,12 @@ $(document).ready(function () {
                 }else{
                     image = product.url_image;
                 }
-                productList.append("<div class='card p-3'><img src='"+ image +"' class='card-img-top' alt='"+product.name+"'><div class='card-body'><h5 class='card-title'>"+product.name+"</h5></div><div class='card-footer'><div class='row'><div class='col col-md-9'><small class='text-muted'> $"+chileanPesoLocale.format(product.price)+"</small></div><div class='col col-md-2'><a class='btn btn-primary m-2'><i class='fa-solid fa-cart-plus'></i></a></div></div></div></div>")
+                if(product.discount == "0" || product.discount == undefined || product.discount == null || product.discount == 0) {
+                    productList.append("<div class='card p-3'><img src='"+ image +"' class='card-img-top' alt='"+product.name+"'><div class='card-body'><h5 class='card-title'>"+product.name+"</h5></div><div class='card-footer'><div class='row'><div class='col col-md-9'><small class='text-muted'> $"+chileanPesoLocale.format(product.price)+"</small></div><div class='col col-md-2'><a class='btn btn-primary m-2'><i class='fa-solid fa-cart-plus'></i></a></div></div></div></div>");
+                }else{
+                    discountPrice = product.price - (product.price * product.discount) / 100;
+                    productList.append("<div class='card p-3'><img src='"+ image +"' class='card-img-top' alt='"+product.name+"'><div class='card-body'><h5 class='card-title'>"+product.name+"</h5></div><div class='card-footer'><div class='row'><div class='col col-md-9'><del class='text-muted'> $"+chileanPesoLocale.format(product.price)+"</del><br><small class='text-muted'> $"+chileanPesoLocale.format(discountPrice)+"</small></div><div class='col col-md-2'><a class='btn btn-primary m-2'><i class='fa-solid fa-cart-plus'></i></a></div></div></div></div>");
+                }
             });
             
             if(page == response.first || response.total == 0){
