@@ -100,6 +100,8 @@ function loadResults(){
             if(page == response.first){
                 previousContainer.addClass("disabled");
             } else {
+                var pagination = $("#pagination");
+                pagination.html("");
                 previousContainer.removeClass("disabled");
                 var linkPrevious = "";
                 if(search != null && search != undefined && search != ""){
@@ -115,6 +117,8 @@ function loadResults(){
             if(page == response.last){
                 nextContainer.addClass("disabled");
             } else {
+                var pagination = $("#pagination");
+                pagination.html("");
                 nextContainer.removeClass("disabled");
                 var linkNext = "";
                 if(search != null && search != undefined && search != ""){
@@ -206,6 +210,7 @@ function search(){
         pagination.html("");
         url = "index.html?search=" + search;
         window.history.pushState('search', "BSALE TEST FRONTEND", url);
+        pagination.html("");
         loadResults();
     }
 }
