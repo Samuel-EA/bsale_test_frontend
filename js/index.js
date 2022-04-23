@@ -171,7 +171,7 @@ function loadCategories(){
             var categories = response.data;
             categories.forEach(category => {
                 var link = 'reloadWithoutRefresh("index.html?category='+category.id+'")';
-                categoriesContainer.append("<li><a class='dropdown-item' href='#' onclick='"+link+"'>"+category.name.toUpperCase()+"</a></li>")
+                categoriesContainer.append("<li><a class='dropdown-item' role='button' onclick='"+link+"'>"+category.name.toUpperCase()+"</a></li>")
             });
             loader.fadeToggle("fast");
             
