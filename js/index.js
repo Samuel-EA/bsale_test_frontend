@@ -209,3 +209,11 @@ function search(){
         loadResults();
     }
 }
+
+$(window).on("popstate", function(e) {
+    var productList = $("#product-list");
+    var pagination = $("#pagination");
+    productList.html("");
+    pagination.html("");
+    loadResults();
+});
