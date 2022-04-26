@@ -100,8 +100,7 @@ function loadResults(){
             if(page == response.first){
                 previousContainer.addClass("disabled");
             } else {
-                var pagination = $("#pagination");
-                pagination.html("");
+                $("#pagination").html("");
                 previousContainer.removeClass("disabled");
                 var linkPrevious = "";
                 if(search != null && search != undefined && search != ""){
@@ -117,8 +116,7 @@ function loadResults(){
             if(page == response.last){
                 nextContainer.addClass("disabled");
             } else {
-                var pagination = $("#pagination");
-                pagination.html("");
+                $("#pagination").html("");
                 nextContainer.removeClass("disabled");
                 var linkNext = "";
                 if(search != null && search != undefined && search != ""){
@@ -141,9 +139,9 @@ function loadResults(){
                     var link = 'reloadWithoutRefresh("index.html?page='+i+'")';
                 }
                 if(i == page){
-                    pagination.append("<li class='page-item active'><a class='page-link' onclick='"+link+"'>"+i+"</a></li>");
+                    $("#pagination").append("<li class='page-item active'><a class='page-link' onclick='"+link+"'>"+i+"</a></li>");
                 }else{
-                    pagination.append("<li class='page-item'><a class='page-link' onclick='"+link+"'>"+i+"</a></li>");
+                    $("#pagination").append("<li class='page-item'><a class='page-link' onclick='"+link+"'>"+i+"</a></li>");
                 }
             
             }
