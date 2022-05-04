@@ -4,7 +4,7 @@ $(document).ready(function () {
         event.preventDefault()
       });
 
-      document.getElementById("search-box").addEventListener("keyup", function(event){
+      document.getElementById("search-box").addEventListener("keypress", function(event){
           // Number 13 is the "Enter" key on the keyboard
           if (event.keyCode === 13) {
               // Cancel the default action, if needed
